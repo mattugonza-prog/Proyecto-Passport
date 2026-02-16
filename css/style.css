@@ -105,6 +105,7 @@ ul {
 
 .seccion-cursos{
     background-color: var(--color-secundario);
+    padding-bottom: 80px;
 }
 
 /* GRID DE CURSOS */

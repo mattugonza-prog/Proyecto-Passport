@@ -1,0 +1,14 @@
+@use 'variables' as *;
+
+.footer-principal {
+    background-color: darken($color-primario, 10%);
+    color: $color-blanco;
+    padding: 40px 20px;
+    text-align: center;
+    border-top: none;
+
+    p {
+        font-size: 0.9rem;
+        opacity: 0.8;
+    }
+}

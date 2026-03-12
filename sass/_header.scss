@@ -1,0 +1,41 @@
+@use 'variables' as *;
+
+// --- HEADER Y NAV ---
+.header-principal {
+    position: sticky;
+    top: 0;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.98);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    padding: 10px 0;
+    z-index: 1000;
+
+    .navbar-brand {
+        display: flex;
+        align-items: center;
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: $color-primario;
+
+        img {
+            margin-right: 10px;
+            width: 80px; 
+            
+            @media (max-width: 768px) {
+                width: 100px;
+            }
+        }
+    }
+
+    .nav-link {
+        color: $color-texto;
+        font-weight: 500;
+        margin: 0 10px;
+        transition: color 0.2s;
+
+        &:hover, &.active {
+            color: $color-primario;
+            font-weight: 700;
+        }
+    }
+}

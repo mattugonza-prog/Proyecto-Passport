@@ -1,5 +1,3 @@
-/* _variables.scss */
-
 // Variables de Color
 $color-primario: #1f3c88;
 $color-secundario: #f5f7fa;
@@ -10,3 +8,49 @@ $color-blanco: #ffffff;
 $fuente-principal: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 $ancho-maximo: 1100px;
 $radio-borde: 8px;
+
+// MIXINS
+// Mixin para botones principales con efecto hover
+@mixin boton($bg-color, $text-color) {
+    background-color: $bg-color;
+    color: $text-color;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s;
+    display: inline-block; 
+
+    &:hover {
+        background-color: darken($bg-color, 10%);
+        transform: translateY(-2px);
+    }
+}
+
+// Mixin para tarjetas con sombra suave
+@mixin tarjeta-suave {
+    background-color: $color-blanco;
+    padding: 30px;
+    border-radius: $radio-borde;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    transition: transform 0.3s ease;
+
+    &:hover {
+        transform: translateY(-5px);
+    }
+}
+
+// EXTENDS
+// Estilo base compartido para todos los títulos de sección 
+%titulo-seccion {
+    color: $color-primario;
+    margin-bottom: 30px;
+    font-weight: 700;
+    font-size: 2rem;
+    text-align: center;
+    
+    @media (max-width: 768px) {
+        font-size: 1.6rem;
+    }
+}

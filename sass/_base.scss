@@ -1,0 +1,36 @@
+@use 'variables' as *;
+
+// --- ESTILOS GENERALES (Reset y Base) ---
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: $fuente-principal;
+    color: $color-texto;
+    background-color: $color-blanco;
+    line-height: 1.6;
+    padding-top: 0;
+}
+
+img {
+    max-width: 100%;
+    display: block;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+ul {
+    list-style: none;
+}
+
+.contenedor {
+    max-width: $ancho-maximo;
+    margin: 0 auto;
+    padding: 0 20px;
+}

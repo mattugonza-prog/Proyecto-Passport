@@ -1,7 +1,9 @@
-@use 'variables';
+// Punto de entrada: compila a css/estilos.css (ver package.json)
 @use 'animaciones';
 @use 'base';
 @use 'header';
-@use 'secciones';
+@use 'componentes';
+@use 'inicio';
+@use 'cursos';
+@use 'inscripcion';
 @use 'footer';
-@use 'componentes'

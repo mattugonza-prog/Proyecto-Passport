@@ -1,0 +1,13 @@
+{
+  "name": "proyecto-passport",
+  "version": "2.0.0",
+  "private": true,
+  "description": "Sitio de Passport English: clases de inglés online.",
+  "scripts": {
+    "sass": "sass sass/estilos.scss css/estilos.css --style=compressed",
+    "sass:watch": "sass --watch sass/estilos.scss css/estilos.css"
+  },
+  "devDependencies": {
+    "sass": "^1.80.0"
+  }
+}

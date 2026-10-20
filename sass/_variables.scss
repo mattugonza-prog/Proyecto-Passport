@@ -1,56 +1,69 @@
-// Variables de Color
-$color-primario: #1f3c88;
-$color-secundario: #f5f7fa;
-$color-texto: #333333;
-$color-blanco: #ffffff;
+// ==========================================
+// TOKENS DE MARCA
+// ==========================================
 
-// Variables de Fuente y Estructura
-$fuente-principal: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-$ancho-maximo: 1100px;
-$radio-borde: 8px;
+// Colores de marca
+$azul: #1f3c88;            // Color principal (títulos, botones)
+$azul-profundo: #14275a;   // Secciones oscuras y footer
+$azul-claro: #dfe6f7;      // Fondos suaves con tinte de marca
+$amarillo: #f7d63a;        // Amarillo del globo del logo (acento)
+$amarillo-suave: #fdf3c4;
 
-// MIXINS
-// Mixin para botones principales con efecto hover
-@mixin boton($bg-color, $text-color) {
-    background-color: $bg-color;
-    color: $text-color;
-    border: none;
-    padding: 12px 24px;
-    border-radius: 5px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s;
-    display: inline-block; 
+// Colores de cada nivel (tomados de las piezas gráficas de los cursos)
+$nivel-basic: #76cbbe;
+$nivel-intermediate: #fdd15c;
+$nivel-advanced: #e03a78;
 
-    &:hover {
-        background-color: darken($bg-color, 10%);
-        transform: translateY(-2px);
-    }
-}
+// Neutros con un leve tinte hacia el azul de marca
+$tinta: #17203a;           // Texto principal
+$texto-suave: #4a5470;     // Texto secundario (contraste AA sobre blanco y $fondo-alt)
+$borde: #dde2ee;
+$borde-fuerte: #b9c1d6;
+$error: #c2334d;
+$fondo: #ffffff;
+$fondo-alt: #f3f5fa;
+$blanco: #ffffff;
 
-// Mixin para tarjetas con sombra suave
-@mixin tarjeta-suave {
-    background-color: $color-blanco;
-    padding: 30px;
-    border-radius: $radio-borde;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-    transition: transform 0.3s ease;
+$whatsapp: #1da851;        // Verde WhatsApp oscurecido para que el texto blanco sea legible
+$whatsapp-oscuro: #178a43;
 
-    &:hover {
-        transform: translateY(-5px);
-    }
-}
+// Tipografía
+$fuente: 'Outfit', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
 
-// EXTENDS
-// Estilo base compartido para todos los títulos de sección 
-%titulo-seccion {
-    color: $color-primario;
-    margin-bottom: 30px;
-    font-weight: 700;
-    font-size: 2rem;
-    text-align: center;
-    
-    @media (max-width: 768px) {
-        font-size: 1.6rem;
-    }
-}
+// Escala tipográfica fluida
+$texto-xs: 0.8125rem;
+$texto-sm: 0.9375rem;
+$texto-base: 1.0625rem;
+$texto-lg: clamp(1.125rem, 1rem + 0.5vw, 1.3125rem);
+$titulo-sm: clamp(1.25rem, 1.1rem + 0.6vw, 1.5rem);
+$titulo-md: clamp(1.75rem, 1.4rem + 1.5vw, 2.5rem);
+$titulo-lg: clamp(2.25rem, 1.6rem + 3vw, 4rem);
+
+// Estructura
+$ancho-maximo: 1160px;
+$gutter: clamp(1rem, 4vw, 2rem);
+$radio-sm: 8px;
+$radio: 14px;
+$radio-pill: 999px;
+
+// Espaciado vertical de secciones (variado para dar ritmo)
+$seccion-sm: clamp(3rem, 6vw, 4.5rem);
+$seccion: clamp(4rem, 9vw, 7rem);
+
+// Sombras
+$sombra-sm: 0 1px 2px rgba($tinta, 0.06), 0 2px 6px rgba($tinta, 0.06);
+$sombra: 0 2px 4px rgba($tinta, 0.04), 0 8px 24px rgba($tinta, 0.08);
+
+// Movimiento
+$ease-out: cubic-bezier(0.25, 1, 0.5, 1);       // ease-out-quart
+$ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+$duracion: 0.25s;
+
+// Escala de z-index
+$z-header: 100;
+$z-menu: 110;
+$z-flotante: 200;
+
+// Breakpoints
+$bp-tablet: 768px;
+$bp-desktop: 1024px;

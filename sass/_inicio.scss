@@ -1,0 +1,463 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+
+// ==========================================
+// PÁGINA: INICIO
+// ==========================================
+
+// --- Hero ---
+.hero {
+    position: relative;
+    overflow: hidden;
+    padding-block: clamp(3rem, 8vw, 6rem) $seccion;
+    background-color: $fondo-alt;
+
+    &__grilla {
+        display: grid;
+        gap: 3rem;
+        align-items: center;
+
+        @include desde($bp-desktop) {
+            grid-template-columns: 1.15fr 1fr;
+        }
+    }
+
+    &__texto > * {
+        animation: aparecerDesdeAbajo 0.8s $ease-out both;
+    }
+
+    // Entrada escalonada de los elementos del hero
+    @for $i from 2 through 5 {
+        &__texto > :nth-child(#{$i}) {
+            animation-delay: #{($i - 1) * 0.08}s;
+        }
+    }
+
+    &__etiqueta {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        margin-bottom: 1.25rem;
+        padding: 0.375rem 0.875rem;
+        border-radius: $radio-pill;
+        background-color: $blanco;
+        color: $azul;
+        font-size: $texto-sm;
+        font-weight: 600;
+        box-shadow: $sombra-sm;
+
+        // Indicador "en vivo"
+        &::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: $whatsapp;
+            box-shadow: 0 0 0 4px rgba($whatsapp, 0.18);
+        }
+    }
+
+    h1 {
+        max-width: 14ch;
+        color: $azul;
+        font-size: $titulo-lg;
+        font-weight: 700;
+        line-height: 1.05;
+        letter-spacing: -0.03em;
+    }
+
+    // Trazo de resaltador amarillo, como el globo del logo
+    .resaltado {
+        position: relative;
+        white-space: nowrap;
+        z-index: 0;
+
+        &::after {
+            content: '';
+            position: absolute;
+            left: -0.1em;
+            right: -0.1em;
+            bottom: 0.06em;
+            height: 0.36em;
+            z-index: -1;
+            border-radius: 0.2em;
+            background-color: $amarillo;
+            transform: rotate(-1.5deg) scaleX(0);
+            transform-origin: left;
+            animation: subrayar 0.7s $ease-out-expo 0.6s forwards;
+        }
+    }
+
+    &__bajada {
+        max-width: 48ch;
+        margin-top: 1.5rem;
+        color: $texto-suave;
+        font-size: $texto-lg;
+    }
+
+    &__acciones {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+        margin-top: 2rem;
+    }
+
+    &__datos {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem 1.5rem;
+        margin-top: 2.25rem;
+        color: $texto-suave;
+        font-size: $texto-sm;
+        font-weight: 500;
+
+        li {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        svg {
+            width: 18px;
+            height: 18px;
+            color: $azul;
+        }
+    }
+
+    &__visual {
+        display: grid;
+        place-items: center;
+        animation: entradaSuave 1.2s $ease-out 0.2s both;
+    }
+}
+
+@keyframes subrayar {
+    to { transform: rotate(-1.5deg) scaleX(1); }
+}
+
+// Sello del logo con el texto circular girando
+.sello-animado {
+    position: relative;
+    width: min(100%, 320px);
+    aspect-ratio: 1;
+
+    @include desde($bp-tablet) {
+        width: min(100%, 440px);
+    }
+
+    // Círculo amarillo de fondo (el color del globo)
+    &::before {
+        content: '';
+        position: absolute;
+        inset: 6%;
+        border-radius: 50%;
+        background-color: $amarillo;
+    }
+
+    &__anillo {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        animation: girar 40s linear infinite;
+
+        text {
+            fill: $azul-profundo;
+            font-family: $fuente;
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 0.18em;
+        }
+    }
+
+    &__centro {
+        position: absolute;
+        inset: 21%;
+        display: grid;
+        place-items: center;
+        border-radius: 50%;
+        background-color: $blanco;
+        box-shadow: 0 0 0 3px $azul-profundo, $sombra;
+
+        img {
+            width: 88%;
+        }
+    }
+
+    // Etiquetas de niveles flotando alrededor del sello
+    &__nivel {
+        position: absolute;
+        padding: 0.375rem 0.875rem;
+        border-radius: $radio-pill;
+        border: 2px solid $tinta;
+        background-color: $blanco;
+        color: $tinta;
+        font-size: $texto-sm;
+        font-weight: 700;
+        letter-spacing: 0.04em;
+        box-shadow: 3px 3px 0 $tinta;
+
+        &--basic {
+            top: 8%;
+            left: 0;
+            background-color: $nivel-basic;
+            transform: rotate(-6deg);
+        }
+
+        &--intermediate {
+            top: 46%;
+            right: 0;
+            background-color: $nivel-intermediate;
+            transform: rotate(5deg);
+        }
+
+        &--advanced {
+            bottom: 6%;
+            left: 6%;
+            background-color: $nivel-advanced;
+            color: $blanco;
+            transform: rotate(-3deg);
+        }
+    }
+}
+
+// --- Metodología + beneficios ---
+.metodologia {
+    padding-block: $seccion;
+    background-color: $azul;
+    color: rgba($blanco, 0.86);
+
+    &__grilla {
+        display: grid;
+        gap: 3rem;
+
+        @include desde($bp-desktop) {
+            grid-template-columns: 1fr 1.1fr;
+            gap: 5rem;
+            align-items: start;
+        }
+    }
+
+    &__intro {
+        @include desde($bp-desktop) {
+            position: sticky;
+            top: 120px;
+        }
+
+        h2 {
+            @extend %titulo-seccion;
+            color: $blanco;
+        }
+
+        p {
+            max-width: 46ch;
+            margin-top: 1.25rem;
+            font-size: $texto-lg;
+        }
+    }
+
+    &__lista {
+        display: grid;
+
+        li {
+            display: flex;
+            gap: 1.25rem;
+            padding-block: 1.75rem;
+            border-top: 1px solid rgba($blanco, 0.16);
+
+            &:first-child {
+                padding-top: 0;
+                border-top: 0;
+            }
+        }
+
+        h3 {
+            margin-bottom: 0.375rem;
+            color: $blanco;
+            font-size: $titulo-sm;
+            font-weight: 600;
+        }
+    }
+}
+
+// --- Profesora ---
+.profe {
+    padding-block: $seccion;
+
+    &__grilla {
+        display: grid;
+        gap: 3rem;
+        align-items: center;
+
+        @include desde($bp-tablet) {
+            grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+            gap: clamp(3rem, 6vw, 5rem);
+        }
+    }
+
+    &__foto {
+        position: relative;
+        // Deja lugar al bloque amarillo desplazado para que no genere scroll horizontal
+        width: min(440px, calc(100% - 1.25rem));
+        margin-inline: auto;
+
+        // Bloque de color desplazado detrás de la foto
+        &::before {
+            content: '';
+            position: absolute;
+            inset: 1.25rem -1.25rem -1.25rem 1.25rem;
+            border-radius: $radio;
+            background-color: $amarillo;
+        }
+
+        img {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 4 / 5;
+            object-fit: cover;
+            object-position: 40% 30%;
+            border-radius: $radio;
+        }
+    }
+
+    &__texto {
+        h2 {
+            @extend %titulo-seccion;
+        }
+    }
+
+    &__nombre {
+        margin-top: 1.5rem;
+        color: $tinta;
+        font-size: $titulo-sm;
+        font-weight: 700;
+    }
+
+    &__rol {
+        color: $texto-suave;
+        font-size: $texto-sm;
+        font-weight: 500;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+    }
+
+    &__bio {
+        max-width: 52ch;
+        margin-top: 1.25rem;
+        color: $texto-suave;
+        font-size: $texto-lg;
+    }
+
+    &__acciones {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+        margin-top: 2rem;
+    }
+}
+
+// --- Resumen de niveles ---
+.niveles-resumen {
+    padding-block: $seccion-sm $seccion;
+    background-color: $fondo-alt;
+
+    &__lista {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: 1rem;
+    }
+
+    &__item {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        gap: 0.25rem;
+        height: 100%;
+        padding: 1.75rem 1.5rem 1.5rem;
+        overflow: hidden;
+        border: 1px solid $borde;
+        border-radius: $radio;
+        background-color: $blanco;
+        transition: border-color $duracion $ease-out, box-shadow $duracion $ease-out;
+
+        // Franja superior con el color del nivel
+        &::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 6px;
+            background-color: var(--color-nivel);
+        }
+
+        @include hover {
+            border-color: $azul;
+            box-shadow: $sombra;
+
+            .niveles-resumen__flecha {
+                transform: translateX(4px);
+            }
+        }
+    }
+
+    &__numero {
+        color: $texto-suave;
+        font-size: $texto-sm;
+        font-weight: 600;
+    }
+
+    &__titulo {
+        color: $azul;
+        font-size: $titulo-sm;
+        font-weight: 700;
+    }
+
+    &__duracion {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-top: 0.75rem;
+        color: $texto-suave;
+        font-size: $texto-sm;
+    }
+
+    &__flecha {
+        width: 20px;
+        height: 20px;
+        color: $azul;
+        transition: transform $duracion $ease-out;
+    }
+}
+
+// --- Llamado a la acción final ---
+.cta-final {
+    padding-block: $seccion-sm;
+    background-color: $amarillo;
+    color: $azul-profundo;
+
+    &__caja {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        gap: 2rem;
+    }
+
+    h2 {
+        @extend %titulo-seccion;
+        color: $azul-profundo;
+    }
+
+    p {
+        max-width: 46ch;
+        margin-top: 0.75rem;
+        font-size: $texto-lg;
+    }
+
+    &__acciones {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+    }
+}

@@ -1,9 +1,13 @@
-@keyframes aparecerDesdeArriba {
-    0% { opacity: 0; transform: translateY(-30px); }
-    100% { opacity: 1; transform: translateY(0); }
+@keyframes aparecerDesdeAbajo {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
 @keyframes entradaSuave {
-    0% { opacity: 0; }
-    100% { opacity: 1; }
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes girar {
+    to { transform: rotate(360deg); }
 }

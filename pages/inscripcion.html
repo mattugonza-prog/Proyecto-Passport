@@ -58,8 +58,8 @@
             <div class="contenedor">
                 <h1>Inscribite a las clases</h1>
                 <p>
-                    Completá el formulario y se abre WhatsApp con tu mensaje listo para enviar.
-                    Te respondo a la brevedad para coordinar tu lugar.
+                    Completá el formulario y reservá tu lugar. Te respondo por email
+                    a la brevedad para coordinar los detalles.
                 </p>
             </div>
         </section>
@@ -99,46 +99,74 @@
                     </div>
                 </aside>
 
-                <!-- Sin JS, el formulario igual abre el chat de WhatsApp. Con JS (main.js) arma el mensaje con los datos. -->
-                <form class="formulario" id="formulario" action="https://wa.me/5493512068745" method="get" target="_blank" data-formulario-whatsapp>
-                    <h2>Formulario de inscripción</h2>
-                    <p class="formulario__ayuda">Los campos marcados como opcionales podés dejarlos vacíos.</p>
+                <!-- El formulario se envía por email con FormSubmit (formsubmit.co).
+                     Con JS (main.js) se envía sin salir de la página; sin JS, FormSubmit redirige de vuelta con ?enviado=1. -->
+                <form class="formulario" id="formulario" action="https://formsubmit.co/fla.tombesi@gmail.com" method="post" data-formulario-email>
+                    <div class="formulario__contenido">
+                        <h2>Formulario de inscripción</h2>
+                        <p class="formulario__ayuda">Los campos marcados como opcionales podés dejarlos vacíos.</p>
 
-                    <div class="formulario__campos">
-                        <div class="formulario__grupo">
-                            <label for="nombre">Nombre y apellido</label>
-                            <input type="text" id="nombre" name="nombre" autocomplete="name" placeholder="Ej: Juana Pérez" required>
-                        </div>
-                        <div class="formulario__grupo">
-                            <label for="email">Email <span class="opcional">(opcional)</span></label>
-                            <input type="email" id="email" name="email" autocomplete="email" inputmode="email" placeholder="tu@email.com">
-                        </div>
-                        <div class="formulario__grupo formulario__grupo--ancho">
-                            <label for="nivel">Nivel que te interesa</label>
-                            <select id="nivel" name="nivel" required>
-                                <option value="" disabled selected>Elegí un nivel</option>
-                                <option value="basic">Basic (nivel 1, principiante)</option>
-                                <option value="intermediate">Intermediate (nivel 2)</option>
-                                <option value="advanced">Advanced &amp; Business (nivel 3)</option>
-                                <option value="no-se">No sé mi nivel, quiero orientación</option>
-                            </select>
-                        </div>
-                        <fieldset class="formulario__grupo formulario__grupo--ancho">
-                            <legend>Horario preferido <span class="opcional">(opcional)</span></legend>
-                            <div class="formulario__opciones">
-                                <label><input type="radio" name="horario" value="Mañana"><span>Mañana</span></label>
-                                <label><input type="radio" name="horario" value="Tarde"><span>Tarde</span></label>
-                                <label><input type="radio" name="horario" value="Noche"><span>Noche</span></label>
+                        <!-- Configuración de FormSubmit -->
+                        <input type="hidden" name="_subject" value="Nueva inscripción - Passport English">
+                        <input type="hidden" name="_template" value="table">
+                        <input type="hidden" name="_captcha" value="false">
+                        <input type="hidden" name="_next" value="https://passport-english.vercel.app/pages/inscripcion.html?enviado=1#formulario">
+                        <!-- Trampa anti-spam: las personas no la ven, los bots la completan -->
+                        <div class="visualmente-oculto" aria-hidden="true"><input type="text" name="_honey" tabindex="-1" autocomplete="off"></div>
+
+                        <div class="formulario__campos">
+                            <div class="formulario__grupo">
+                                <label for="nombre">Nombre y apellido</label>
+                                <input type="text" id="nombre" name="nombre" autocomplete="name" placeholder="Ej: Juana Pérez" required>
                             </div>
-                        </fieldset>
-                        <div class="formulario__grupo formulario__grupo--ancho">
-                            <label for="comentarios">Objetivos o dudas <span class="opcional">(opcional)</span></label>
-                            <textarea id="comentarios" name="comentarios" rows="4" placeholder="Contame para qué querés aprender inglés o qué dudas tenés"></textarea>
+                            <div class="formulario__grupo">
+                                <label for="email">Email</label>
+                                <input type="email" id="email" name="email" autocomplete="email" inputmode="email" placeholder="tu@email.com" required>
+                            </div>
+                            <div class="formulario__grupo">
+                                <label for="telefono">WhatsApp <span class="opcional">(opcional)</span></label>
+                                <input type="tel" id="telefono" name="telefono" autocomplete="tel" inputmode="tel" placeholder="Ej: 351 123-4567">
+                            </div>
+                            <div class="formulario__grupo">
+                                <label for="nivel">Nivel que te interesa</label>
+                                <select id="nivel" name="nivel" required>
+                                    <option value="" disabled selected>Elegí un nivel</option>
+                                    <option value="basic">Basic (nivel 1, principiante)</option>
+                                    <option value="intermediate">Intermediate (nivel 2)</option>
+                                    <option value="advanced">Advanced &amp; Business (nivel 3)</option>
+                                    <option value="no-se">No sé mi nivel, quiero orientación</option>
+                                </select>
+                            </div>
+                            <fieldset class="formulario__grupo formulario__grupo--ancho">
+                                <legend>Horario preferido <span class="opcional">(opcional)</span></legend>
+                                <div class="formulario__opciones">
+                                    <label><input type="radio" name="horario" value="Mañana"><span>Mañana</span></label>
+                                    <label><input type="radio" name="horario" value="Tarde"><span>Tarde</span></label>
+                                    <label><input type="radio" name="horario" value="Noche"><span>Noche</span></label>
+                                </div>
+                            </fieldset>
+                            <div class="formulario__grupo formulario__grupo--ancho">
+                                <label for="comentarios">Objetivos o dudas <span class="opcional">(opcional)</span></label>
+                                <textarea id="comentarios" name="comentarios" rows="4" placeholder="Contame para qué querés aprender inglés o qué dudas tenés"></textarea>
+                            </div>
                         </div>
+
+                        <p class="formulario__error" role="alert" hidden>
+                            No se pudo enviar la inscripción. Probá de nuevo en unos minutos o
+                            <a href="https://wa.me/5493512068745" target="_blank" rel="noopener">escribime por WhatsApp</a>.
+                        </p>
+                        <button type="submit" class="boton boton--primario boton--bloque">Enviar inscripción</button>
+                        <p class="formulario__nota">Te respondo por email a la brevedad.</p>
                     </div>
 
-                    <button type="submit" class="boton boton--primario boton--bloque">Enviar por WhatsApp</button>
-                    <p class="formulario__nota">Se abre WhatsApp con tu mensaje listo para enviar.</p>
+                    <div class="formulario__exito" role="status" tabindex="-1" hidden>
+                        <span class="icono-circulo">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+                        </span>
+                        <h2>¡Listo, recibí tu inscripción!</h2>
+                        <p>Te escribo a tu email a la brevedad para coordinar tu lugar. Si no ves mi respuesta, revisá la carpeta de spam.</p>
+                        <a class="boton boton--secundario" href="./cursos.html">Volver a los cursos</a>
+                    </div>
                 </form>
             </div>
         </section>

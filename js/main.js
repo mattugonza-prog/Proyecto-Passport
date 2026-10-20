@@ -1,7 +1,5 @@
 // Passport English: interacciones del sitio (sin dependencias)
 
-const WHATSAPP = '5493512068745';
-
 // --- Menú mobile ---
 const toggle = document.querySelector('.menu-toggle');
 const menu = document.getElementById('menu-principal');
@@ -42,35 +40,59 @@ document.querySelectorAll('[data-anio]').forEach((elemento) => {
     elemento.textContent = new Date().getFullYear();
 });
 
-// --- Formulario de inscripción → mensaje de WhatsApp ---
-const formulario = document.querySelector('[data-formulario-whatsapp]');
+// --- Formulario de inscripción → email (FormSubmit) ---
+const formulario = document.querySelector('[data-formulario-email]');
 
 if (formulario) {
     const selectNivel = formulario.querySelector('#nivel');
+    const contenido = formulario.querySelector('.formulario__contenido');
+    const exito = formulario.querySelector('.formulario__exito');
+    const error = formulario.querySelector('.formulario__error');
+    const boton = formulario.querySelector('button[type="submit"]');
+    const params = new URLSearchParams(window.location.search);
+
+    const mostrarExito = () => {
+        contenido.hidden = true;
+        exito.hidden = false;
+        exito.focus();
+    };
 
     // Preselecciona el nivel si se llega desde un curso (?nivel=basic)
-    const nivelUrl = new URLSearchParams(window.location.search).get('nivel');
+    const nivelUrl = params.get('nivel');
     if (nivelUrl && selectNivel.querySelector(`option[value="${CSS.escape(nivelUrl)}"]`)) {
         selectNivel.value = nivelUrl;
     }
 
-    formulario.addEventListener('submit', (evento) => {
+    // Vuelta desde FormSubmit cuando el envío se hizo sin JS
+    if (params.get('enviado') === '1') mostrarExito();
+
+    formulario.addEventListener('submit', async (evento) => {
         evento.preventDefault();
         if (!formulario.reportValidity()) return;
 
         const datos = new FormData(formulario);
-        const nivel = selectNivel.options[selectNivel.selectedIndex].text;
-        const lineas = [
-            `¡Hola! Quiero inscribirme en Passport English.`,
-            ``,
-            `Nombre: ${datos.get('nombre').trim()}`,
-            datos.get('email') ? `Email: ${datos.get('email').trim()}` : null,
-            `Nivel: ${nivel}`,
-            datos.get('horario') ? `Horario preferido: ${datos.get('horario')}` : null,
-            datos.get('comentarios').trim() ? `Comentarios: ${datos.get('comentarios').trim()}` : null,
-        ].filter((linea) => linea !== null);
+        // En el email, el nivel aparece con su nombre completo y no con el valor interno
+        datos.set('nivel', selectNivel.options[selectNivel.selectedIndex].text);
 
-        const url = `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(lineas.join('\n'))}`;
-        window.open(url, '_blank', 'noopener');
+        error.hidden = true;
+        boton.disabled = true;
+        boton.textContent = 'Enviando…';
+
+        try {
+            const respuesta = await fetch(formulario.action.replace('formsubmit.co/', 'formsubmit.co/ajax/'), {
+                method: 'POST',
+                headers: { Accept: 'application/json' },
+                body: datos,
+            });
+            const resultado = await respuesta.json().catch(() => ({}));
+            if (!respuesta.ok || String(resultado.success) === 'false') throw new Error(resultado.message);
+            formulario.reset();
+            mostrarExito();
+        } catch {
+            error.hidden = false;
+        } finally {
+            boton.disabled = false;
+            boton.textContent = 'Enviar inscripción';
+        }
     });
 }

@@ -224,26 +224,6 @@
         margin-top: 1.75rem;
     }
 
-    &__error {
-        margin-top: 1.5rem;
-        padding: 0.875rem 1rem;
-        border: 1.5px solid $error;
-        border-radius: $radio-sm;
-        background-color: rgba($error, 0.06);
-        color: $tinta;
-        font-size: $texto-sm;
-
-        a {
-            color: $azul;
-            font-weight: 600;
-            text-decoration: underline;
-        }
-
-        + .boton {
-            margin-top: 1rem;
-        }
-    }
-
     // Confirmación que reemplaza al formulario después de enviarlo
     &__exito {
         display: flex;

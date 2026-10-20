@@ -50,70 +50,43 @@ document.querySelectorAll('[data-anio]').forEach((elemento) => {
 });
 
 // --- Formulario de inscripción → email (FormSubmit) ---
+// Envío tradicional: FormSubmit muestra un captcha y vuelve con ?enviado=1.
+// (La respuesta automática al alumno no funciona por AJAX ni sin captcha.)
 const formulario = document.querySelector('[data-formulario-email]');
 
 if (formulario) {
     const selectNivel = formulario.querySelector('#nivel');
     const contenido = formulario.querySelector('.formulario__contenido');
     const exito = formulario.querySelector('.formulario__exito');
-    const error = formulario.querySelector('.formulario__error');
     const boton = formulario.querySelector('button[type="submit"]');
     const params = new URLSearchParams(window.location.search);
 
-    const mostrarExito = () => {
+    // Preselecciona el nivel si se llega desde un curso (?nivel=basic)
+    const nivelUrl = params.get('nivel');
+    const opcion = nivelUrl && selectNivel.querySelector(`option[data-nivel="${CSS.escape(nivelUrl)}"]`);
+    if (opcion) opcion.selected = true;
+
+    // Vuelta desde FormSubmit después de enviar
+    if (params.get('enviado') === '1') {
         contenido.hidden = true;
         exito.hidden = false;
         exito.focus();
-    };
-
-    // Preselecciona el nivel si se llega desde un curso (?nivel=basic)
-    const nivelUrl = params.get('nivel');
-    if (nivelUrl && selectNivel.querySelector(`option[value="${CSS.escape(nivelUrl)}"]`)) {
-        selectNivel.value = nivelUrl;
     }
 
-    // Vuelta desde FormSubmit cuando el envío se hizo sin JS
-    if (params.get('enviado') === '1') mostrarExito();
-
-    formulario.addEventListener('submit', async (evento) => {
-        evento.preventDefault();
-        if (!formulario.reportValidity()) return;
-
-        const datos = Object.fromEntries(new FormData(formulario));
-        // En el email, el nivel aparece con su nombre completo y no con el valor interno
-        datos.nivel = selectNivel.options[selectNivel.selectedIndex].text;
-
-        error.hidden = true;
-        boton.disabled = true;
-        boton.textContent = 'Enviando…';
-
-        let respuesta;
-        try {
-            respuesta = await fetch(formulario.action.replace('formsubmit.co/', 'formsubmit.co/ajax/'), {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-                body: JSON.stringify(datos),
-            });
-        } catch {
-            // Sin conexión con el servicio vía JS: se envía de forma tradicional y FormSubmit redirige de vuelta
-            HTMLFormElement.prototype.submit.call(formulario);
+    formulario.addEventListener('submit', (evento) => {
+        if (!formulario.checkValidity()) return;
+        // Evita envíos duplicados por doble clic
+        if (boton.disabled) {
+            evento.preventDefault();
             return;
         }
+        boton.disabled = true;
+        boton.textContent = 'Enviando…';
+    });
 
-        try {
-            const resultado = await respuesta.json().catch(() => ({}));
-            if (!respuesta.ok || String(resultado.success) === 'false') {
-                // Ej.: "This form needs Activation" mientras no se confirme el email en FormSubmit
-                throw new Error(resultado.message || `HTTP ${respuesta.status}`);
-            }
-            formulario.reset();
-            mostrarExito();
-        } catch (motivo) {
-            console.error('Formulario de inscripción:', motivo.message);
-            error.hidden = false;
-        } finally {
-            boton.disabled = false;
-            boton.textContent = 'Enviar inscripción';
-        }
+    // Si se vuelve con el botón "atrás", el botón queda habilitado de nuevo
+    window.addEventListener('pageshow', () => {
+        boton.disabled = false;
+        boton.textContent = 'Enviar inscripción';
     });
 }

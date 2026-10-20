@@ -23,7 +23,7 @@
 
     <script>document.documentElement.classList.add('js');</script>
     <link rel="preload" href="/fonts/outfit-variable.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="stylesheet" href="/css/estilos.css?v=3">
+    <link rel="stylesheet" href="/css/estilos.css?v=4">
     <link rel="icon" href="/img/favicon.png" type="image/png">
     <link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
 </head>
@@ -97,8 +97,9 @@
                     </div>
                 </aside>
 
-                <!-- El formulario se envía por email con FormSubmit (formsubmit.co).
-                     Con JS (main.js) se envía sin salir de la página; sin JS, FormSubmit redirige de vuelta con ?enviado=1. -->
+                <!-- El formulario se envía por email con FormSubmit (formsubmit.co) con envío tradicional:
+                     FormSubmit muestra un captcha y vuelve a esta página con ?enviado=1.
+                     Así funciona la respuesta automática (_autoresponse), que no se envía por AJAX ni sin captcha. -->
                 <form class="formulario" id="formulario" action="https://formsubmit.co/fla.tombesi@gmail.com" method="post" data-formulario-email>
                     <div class="formulario__contenido">
                         <h2>Formulario de inscripción</h2>
@@ -107,7 +108,6 @@
                         <!-- Configuración de FormSubmit -->
                         <input type="hidden" name="_subject" value="Nueva inscripción - Passport English">
                         <input type="hidden" name="_template" value="table">
-                        <input type="hidden" name="_captcha" value="false">
                         <input type="hidden" name="_autoresponse" value="¡Hola! Gracias por inscribirte en Passport English. Recibí tus datos y te escribo a la brevedad para coordinar tu lugar. Si tenés alguna duda, también podés escribirme por WhatsApp al 351 206-8745. ¡Nos vemos en clase! Flavia Tombesi, Passport English.">
                         <input type="hidden" name="_next" value="https://passport-english.vercel.app/inscripcion?enviado=1#formulario">
                         <!-- Trampa anti-spam: las personas no la ven, los bots la completan -->
@@ -130,10 +130,10 @@
                                 <label for="nivel">Nivel que te interesa</label>
                                 <select id="nivel" name="nivel" required>
                                     <option value="" disabled selected>Elegí un nivel</option>
-                                    <option value="basic">Basic (nivel 1, principiante)</option>
-                                    <option value="intermediate">Intermediate (nivel 2)</option>
-                                    <option value="advanced">Advanced &amp; Business (nivel 3)</option>
-                                    <option value="no-se">No sé mi nivel, quiero orientación</option>
+                                    <option value="Basic (nivel 1, principiante)" data-nivel="basic">Basic (nivel 1, principiante)</option>
+                                    <option value="Intermediate (nivel 2)" data-nivel="intermediate">Intermediate (nivel 2)</option>
+                                    <option value="Advanced &amp; Business (nivel 3)" data-nivel="advanced">Advanced &amp; Business (nivel 3)</option>
+                                    <option value="No sé mi nivel, quiero orientación" data-nivel="no-se">No sé mi nivel, quiero orientación</option>
                                 </select>
                             </div>
                             <fieldset class="formulario__grupo formulario__grupo--ancho">
@@ -150,10 +150,6 @@
                             </div>
                         </div>
 
-                        <p class="formulario__error" role="alert" hidden>
-                            No se pudo enviar la inscripción. Probá de nuevo en unos minutos o
-                            <a href="https://wa.me/5493512068745" target="_blank" rel="noopener">escribime por WhatsApp</a>.
-                        </p>
                         <button type="submit" class="boton boton--primario boton--bloque">Enviar inscripción</button>
                         <p class="formulario__nota">Te llega un email de confirmación y te respondo a la brevedad.</p>
                         <p class="formulario__privacidad">Al enviar el formulario aceptás la <a href="/privacidad">política de privacidad</a>. Tus datos solo se usan para responder tu inscripción.</p>
@@ -230,6 +226,6 @@
         </span>
     </a>
 
-    <script src="/js/main.js?v=3" defer></script>
+    <script src="/js/main.js?v=4" defer></script>
 </body>
 </html>

@@ -272,6 +272,21 @@
         }
     }
 
+    &__privacidad {
+        margin-top: 1rem;
+        padding-top: 1rem;
+        border-top: 1px solid $borde;
+        color: $texto-suave;
+        font-size: $texto-xs;
+        text-align: center;
+
+        a {
+            color: $azul;
+            font-weight: 600;
+            text-decoration: underline;
+        }
+    }
+
     &__nota {
         display: flex;
         align-items: center;

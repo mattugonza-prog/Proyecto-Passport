@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://passport-english.vercel.app/sitemap.xml

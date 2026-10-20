@@ -78,5 +78,10 @@
         border-top: 1px solid rgba($blanco, 0.14);
         font-size: $texto-xs;
         color: rgba($blanco, 0.7);
+
+        a {
+            text-decoration: underline;
+            text-underline-offset: 3px;
+        }
     }
 }

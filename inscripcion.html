@@ -13,29 +13,27 @@
     <meta property="og:site_name" content="Passport English">
     <meta property="og:title" content="Inscripción a Clases de Inglés | Passport English">
     <meta property="og:description" content="Inscribite a las clases de inglés de Passport English. Completá el formulario y reservá tu lugar en clases online en vivo con una profesora certificada.">
-    <meta property="og:url" content="https://passport-english.vercel.app/pages/inscripcion.html">
+    <meta property="og:url" content="https://passport-english.vercel.app/inscripcion">
     <meta property="og:image" content="https://passport-english.vercel.app/img/og-imagen.jpg">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta property="og:image:alt" content="Passport English: clases de inglés online, en vivo y 100% conversacionales">
     <meta name="twitter:card" content="summary_large_image">
-    <link rel="canonical" href="https://passport-english.vercel.app/pages/inscripcion.html">
+    <link rel="canonical" href="https://passport-english.vercel.app/inscripcion">
 
     <script>document.documentElement.classList.add('js');</script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400..700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../css/estilos.css">
-    <link rel="icon" href="../img/favicon.png" type="image/png">
-    <link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
+    <link rel="preload" href="/fonts/outfit-variable.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="/css/estilos.css?v=3">
+    <link rel="icon" href="/img/favicon.png" type="image/png">
+    <link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
 </head>
 <body>
     <a class="saltar-contenido" href="#contenido">Saltar al contenido</a>
 
     <header class="header-principal">
         <div class="contenedor header-principal__barra">
-            <a class="marca" href="../index.html" aria-label="Passport English, ir al inicio">
-                <img class="marca__sello" src="../img/marca.png" alt="" width="48" height="48">
+            <a class="marca" href="/" aria-label="Passport English, ir al inicio">
+                <img class="marca__sello" src="/img/marca-96.png" alt="" width="48" height="48">
                 <span class="marca__nombre">Passport <span>English</span></span>
             </a>
             <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="menu-principal">
@@ -44,11 +42,11 @@
             </button>
             <nav class="nav-principal" id="menu-principal" aria-label="Principal">
                 <ul class="lista-limpia nav-principal__lista">
-                    <li><a href="../index.html">Inicio</a></li>
-                    <li><a href="./cursos.html">Cursos</a></li>
-                    <li><a href="./cursos.html#preguntas">Preguntas frecuentes</a></li>
+                    <li><a href="/">Inicio</a></li>
+                    <li><a href="/cursos">Cursos</a></li>
+                    <li><a href="/cursos#preguntas">Preguntas frecuentes</a></li>
                 </ul>
-                <a class="boton boton--primario boton--sm" href="./inscripcion.html" aria-current="page">Inscribite</a>
+                <a class="boton boton--primario boton--sm" href="/inscripcion" aria-current="page">Inscribite</a>
             </nav>
         </div>
     </header>
@@ -110,7 +108,8 @@
                         <input type="hidden" name="_subject" value="Nueva inscripción - Passport English">
                         <input type="hidden" name="_template" value="table">
                         <input type="hidden" name="_captcha" value="false">
-                        <input type="hidden" name="_next" value="https://passport-english.vercel.app/pages/inscripcion.html?enviado=1#formulario">
+                        <input type="hidden" name="_autoresponse" value="¡Hola! Gracias por inscribirte en Passport English. Recibí tus datos y te escribo a la brevedad para coordinar tu lugar. Si tenés alguna duda, también podés escribirme por WhatsApp al 351 206-8745. ¡Nos vemos en clase! Flavia Tombesi, Passport English.">
+                        <input type="hidden" name="_next" value="https://passport-english.vercel.app/inscripcion?enviado=1#formulario">
                         <!-- Trampa anti-spam: las personas no la ven, los bots la completan -->
                         <div class="visualmente-oculto" aria-hidden="true"><input type="text" name="_honey" tabindex="-1" autocomplete="off"></div>
 
@@ -156,7 +155,8 @@
                             <a href="https://wa.me/5493512068745" target="_blank" rel="noopener">escribime por WhatsApp</a>.
                         </p>
                         <button type="submit" class="boton boton--primario boton--bloque">Enviar inscripción</button>
-                        <p class="formulario__nota">Te respondo por email a la brevedad.</p>
+                        <p class="formulario__nota">Te llega un email de confirmación y te respondo a la brevedad.</p>
+                        <p class="formulario__privacidad">Al enviar el formulario aceptás la <a href="/privacidad">política de privacidad</a>. Tus datos solo se usan para responder tu inscripción.</p>
                     </div>
 
                     <div class="formulario__exito" role="status" tabindex="-1" hidden>
@@ -164,8 +164,8 @@
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
                         </span>
                         <h2>¡Listo, recibí tu inscripción!</h2>
-                        <p>Te escribo a tu email a la brevedad para coordinar tu lugar. Si no ves mi respuesta, revisá la carpeta de spam.</p>
-                        <a class="boton boton--secundario" href="./cursos.html">Volver a los cursos</a>
+                        <p>Te mandé un email de confirmación y te escribo a la brevedad para coordinar tu lugar. Si no lo ves, revisá la carpeta de spam.</p>
+                        <a class="boton boton--secundario" href="/cursos">Volver a los cursos</a>
                     </div>
                 </form>
             </div>
@@ -176,17 +176,17 @@
         <div class="contenedor">
             <div class="footer-principal__grilla">
                 <div class="footer-principal__marca">
-                    <img src="../img/logo-ok.png" alt="Logo de Passport English" width="1080" height="1080" loading="lazy">
+                    <img src="/img/sello-240.png" alt="Logo de Passport English" width="112" height="112" loading="lazy">
                     <p class="footer-principal__lema">We Teach. You Learn.</p>
                     <p>Clases de inglés online, en vivo y 100% conversacionales.</p>
                 </div>
                 <nav aria-labelledby="footer-navegacion">
                     <h2 id="footer-navegacion">Navegación</h2>
                     <ul class="lista-limpia">
-                        <li><a href="../index.html">Inicio</a></li>
-                        <li><a href="./cursos.html">Cursos</a></li>
-                        <li><a href="./cursos.html#preguntas">Preguntas frecuentes</a></li>
-                        <li><a href="./inscripcion.html">Inscripción</a></li>
+                        <li><a href="/">Inicio</a></li>
+                        <li><a href="/cursos">Cursos</a></li>
+                        <li><a href="/cursos#preguntas">Preguntas frecuentes</a></li>
+                        <li><a href="/inscripcion">Inscripción</a></li>
                     </ul>
                 </nav>
                 <div>
@@ -215,7 +215,7 @@
                 </div>
             </div>
             <div class="footer-principal__legal">
-                <p>© <span data-anio>2026</span> Passport English</p>
+                <p>© <span data-anio>2026</span> Passport English · <a href="/privacidad">Política de privacidad</a></p>
                 <p>Diseño y desarrollo: Matías González</p>
             </div>
         </div>
@@ -230,6 +230,6 @@
         </span>
     </a>
 
-    <script src="../js/main.js" defer></script>
+    <script src="/js/main.js?v=3" defer></script>
 </body>
 </html>

@@ -30,7 +30,16 @@ if (toggle && menu) {
 const header = document.querySelector('.header-principal');
 
 if (header) {
-    const actualizarHeader = () => header.classList.toggle('con-scroll', window.scrollY > 8);
+    // Se agrupa en requestAnimationFrame para no forzar recálculos de layout en cada evento
+    let pendiente = false;
+    const actualizarHeader = () => {
+        if (pendiente) return;
+        pendiente = true;
+        requestAnimationFrame(() => {
+            header.classList.toggle('con-scroll', window.scrollY > 8);
+            pendiente = false;
+        });
+    };
     actualizarHeader();
     window.addEventListener('scroll', actualizarHeader, { passive: true });
 }

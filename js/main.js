@@ -70,25 +70,37 @@ if (formulario) {
         evento.preventDefault();
         if (!formulario.reportValidity()) return;
 
-        const datos = new FormData(formulario);
+        const datos = Object.fromEntries(new FormData(formulario));
         // En el email, el nivel aparece con su nombre completo y no con el valor interno
-        datos.set('nivel', selectNivel.options[selectNivel.selectedIndex].text);
+        datos.nivel = selectNivel.options[selectNivel.selectedIndex].text;
 
         error.hidden = true;
         boton.disabled = true;
         boton.textContent = 'Enviando…';
 
+        let respuesta;
         try {
-            const respuesta = await fetch(formulario.action.replace('formsubmit.co/', 'formsubmit.co/ajax/'), {
+            respuesta = await fetch(formulario.action.replace('formsubmit.co/', 'formsubmit.co/ajax/'), {
                 method: 'POST',
-                headers: { Accept: 'application/json' },
-                body: datos,
+                headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+                body: JSON.stringify(datos),
             });
+        } catch {
+            // Sin conexión con el servicio vía JS: se envía de forma tradicional y FormSubmit redirige de vuelta
+            HTMLFormElement.prototype.submit.call(formulario);
+            return;
+        }
+
+        try {
             const resultado = await respuesta.json().catch(() => ({}));
-            if (!respuesta.ok || String(resultado.success) === 'false') throw new Error(resultado.message);
+            if (!respuesta.ok || String(resultado.success) === 'false') {
+                // Ej.: "This form needs Activation" mientras no se confirme el email en FormSubmit
+                throw new Error(resultado.message || `HTTP ${respuesta.status}`);
+            }
             formulario.reset();
             mostrarExito();
-        } catch {
+        } catch (motivo) {
+            console.error('Formulario de inscripción:', motivo.message);
             error.hidden = false;
         } finally {
             boton.disabled = false;

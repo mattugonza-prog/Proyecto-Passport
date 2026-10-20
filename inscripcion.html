@@ -56,7 +56,7 @@
             <div class="contenedor">
                 <h1>Inscribite a las clases</h1>
                 <p>
-                    Completá el formulario y reservá tu lugar. Te respondo por email
+                    Completá el formulario y reservá tu lugar. Te escribo por WhatsApp
                     a la brevedad para coordinar los detalles.
                 </p>
             </div>
@@ -108,7 +108,7 @@
                         <!-- Configuración de FormSubmit -->
                         <input type="hidden" name="_subject" value="Nueva inscripción - Passport English">
                         <input type="hidden" name="_template" value="table">
-                        <input type="hidden" name="_autoresponse" value="¡Hola! Gracias por inscribirte en Passport English. Recibí tus datos y te escribo a la brevedad para coordinar tu lugar. Si tenés alguna duda, también podés escribirme por WhatsApp al 351 206-8745. ¡Nos vemos en clase! Flavia Tombesi, Passport English.">
+                        <input type="hidden" name="_autoresponse" value="¡Hola! Gracias por inscribirte en Passport English. Recibí tus datos y te escribo por WhatsApp a la brevedad para coordinar tu lugar. Si tenés alguna duda, también podés escribirme por WhatsApp al 351 206-8745. ¡Nos vemos en clase! Flavia Tombesi, Passport English.">
                         <input type="hidden" name="_next" value="https://passport-english.vercel.app/inscripcion?enviado=1#formulario">
                         <!-- Trampa anti-spam: las personas no la ven, los bots la completan -->
                         <div class="visualmente-oculto" aria-hidden="true"><input type="text" name="_honey" tabindex="-1" autocomplete="off"></div>
@@ -123,8 +123,8 @@
                                 <input type="email" id="email" name="email" autocomplete="email" inputmode="email" placeholder="tu@email.com" required>
                             </div>
                             <div class="formulario__grupo">
-                                <label for="telefono">WhatsApp <span class="opcional">(opcional)</span></label>
-                                <input type="tel" id="telefono" name="telefono" autocomplete="tel" inputmode="tel" placeholder="Ej: 351 123-4567">
+                                <label for="telefono">WhatsApp</label>
+                                <input type="tel" id="telefono" name="telefono" autocomplete="tel" inputmode="tel" placeholder="Ej: 351 123-4567" pattern="[0-9+\(\)\s\-]{8,20}" title="Ingresá tu número con código de área, por ejemplo 351 123-4567" required>
                             </div>
                             <div class="formulario__grupo">
                                 <label for="nivel">Nivel que te interesa</label>
@@ -151,7 +151,7 @@
                         </div>
 
                         <button type="submit" class="boton boton--primario boton--bloque">Enviar inscripción</button>
-                        <p class="formulario__nota">Te llega un email de confirmación y te respondo a la brevedad.</p>
+                        <p class="formulario__nota">Te llega un email de confirmación y te escribo por WhatsApp a la brevedad.</p>
                         <p class="formulario__privacidad">Al enviar el formulario aceptás la <a href="/privacidad">política de privacidad</a>. Tus datos solo se usan para responder tu inscripción.</p>
                     </div>
 
@@ -160,7 +160,7 @@
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
                         </span>
                         <h2>¡Listo, recibí tu inscripción!</h2>
-                        <p>Te mandé un email de confirmación y te escribo a la brevedad para coordinar tu lugar. Si no lo ves, revisá la carpeta de spam.</p>
+                        <p>Te mandé un email de confirmación y te escribo por WhatsApp a la brevedad para coordinar tu lugar. Si no ves el email, revisá la carpeta de spam.</p>
                         <a class="boton boton--secundario" href="/cursos">Volver a los cursos</a>
                     </div>
                 </form>
